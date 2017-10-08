@@ -21,7 +21,7 @@
  */
 #include "script_component.hpp"
 
-params [["_vehicle", objNull, [objNull]], ["_unit", objNull, [objNull]], "_turretPath", "_numMagazines", "_magazineClass", "_numRounds", "_pylon"];
+params ["_vehicle", "_unit", "_turretPath", "_numMagazines", "_magazineClass", "_numRounds", "_pylon"];
 TRACE_7("rearmSuccess",_vehicle,_unit,_turretPath,_numMagazines,_magazineClass,_numRounds,_pylon);
 
 if (local _unit) then {
@@ -38,5 +38,5 @@ if (isServer) then {
         [QGVAR(rearmSuccessLocalEH), _this, _turretOwnerID] call CBA_fnc_ownerEvent;
     };
 } else {
-    [QGVAR(rearmSuccessLocalEH), _this] call EFUNC(common,serverEvent);
+    [QGVAR(rearmSuccessEH), _this] call CBA_fnc_serverEvent;
 };

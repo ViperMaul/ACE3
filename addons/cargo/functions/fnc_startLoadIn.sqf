@@ -24,7 +24,7 @@ private _vehicle = _cargoVehicle;
 if (isNull _vehicle) then {
     {
         if ([_object, _x] call FUNC(canLoadItemIn)) exitWith {_vehicle = _x};
-    } forEach (nearestObjects [_player, CARGO_VEHICLE_CLASSES, MAX_LOAD_DISTANCE]);
+    } forEach (nearestObjects [_player, GVAR(cargoHolderTypes), MAX_LOAD_DISTANCE]);
 };
 
 if (isNull _vehicle) exitWith {
@@ -42,7 +42,9 @@ if ([_object, _vehicle] call FUNC(canLoadItemIn)) then {
         [_object,_vehicle],
         {["ace_loadCargo", _this select 0] call CBA_fnc_localEvent},
         {},
-        localize LSTRING(LoadingItem)
+        localize LSTRING(LoadingItem),
+        {true},
+        ["isNotSwimming"]
     ] call EFUNC(common,progressBar);
     _return = true;
 } else {
